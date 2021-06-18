@@ -20,16 +20,39 @@ def input_check(input_time):
     # return False if not satisfied 2 condition above
     return False
 
+# function for display time in screen
+def display(input_time):
+
+    display_dict = {
+        "0":[" __ ","|  |","|__|"],
+        "1":["    ","   |","   |"],
+        "2":[" __ "," __|","|__ "],
+        "3":[" __ "," __|"," __|"],
+        "4":["    ","|__|","   |"],
+        "5":[" __ ","|__ "," __|"],
+        "6":[" __ ","|__ ","|__|"],
+        "7":[" __ ","   |","   |"],
+        "8":[" __ ","|__|","|__|"],
+        "9":[" __ ","|__|"," __|"],
+        ":":[  " " ,  "." ,  "." ],
+        "e":["    ","    "," __ "]
+    }
+
+    for i in range(3):
+        for e in input_time:
+            print(display_dict[e][i], end=" ")
+        print()
+
 
 # main function
 def main():
     input_time = input().strip()
     
-    # check input format
+    # check input format if input correct display xx:xx:xx else display _ _ : _ _ : _ _
     if input_check(input_time):
-        print("okay")
+        display(input_time)
     else:
-        print("error")
+        display("ee:ee:ee")
         
 
 
