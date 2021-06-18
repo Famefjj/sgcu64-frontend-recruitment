@@ -76,5 +76,5 @@
 - ให้ติดตั้ง [python3](https://www.python.org/downloads/) ให้เรียบร้อย แล้วเพิ่มลงในpath
 
 ## วิธีการรัน
-- เปิด terminal หรือ cmd แล้วไปที่โฟลเดอร์ Problem #1
-- รัน source code โดยใช้คำสั่ง "python seven_segment.py"
+- 1.เปิด terminal หรือ cmd แล้วไปที่โฟลเดอร์ Problem #1
+- 2.รัน source code โดยใช้คำสั่ง "python seven_segment.py"
