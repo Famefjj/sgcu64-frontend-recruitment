@@ -1,7 +1,9 @@
 
-
+# get and check input in main menu page
 def main_input_check():
     main_input = input("Please input any number: ")
+
+    # check to see if input valid, if input not valid, try again
     if main_input == "1":
         print("valid")
     elif main_input == "2":
