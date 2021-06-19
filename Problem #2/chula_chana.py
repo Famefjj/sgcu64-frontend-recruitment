@@ -1,3 +1,11 @@
+def people_count():
+
+    # display people count of each place
+    i = 1
+    for place in checkin_dict:
+        print("  "+str(i)+". "+place+" :",len(checkin_dict[place]))
+        i += 1
+
 def check_out(phone_number):
     for place in checkin_dict:
         if phone_number in checkin_dict[place]:
@@ -58,7 +66,7 @@ def main():
         phone_number = input("Enter phone number you want to check out: ")
         check_out(phone_number)
     elif main_input == "3":
-        pass
+        people_count()
     else :
         print("invalid input, please try again.")
         print("-----------------------------------------------------------------")
@@ -75,5 +83,5 @@ checkin_dict = {
     "Samyan Mitr Town" : []
 }
 
-
-main()
+while True:
+    main()
