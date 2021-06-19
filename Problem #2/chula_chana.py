@@ -1,29 +1,25 @@
 
+
 def check_in():
     
     # line indicate end of main menu section
     print("-----------------------------------------------------------------")
-
     print("Check in")
 
     # get phone number
     phone_number = input("Enter phone number: ")
 
     # get location of user
-    places = {
-        "1":"Mahamakut Building",
-        "2":"Sara Phra Kaew",
-        "3":"CU Sport Complex",
-        "4":"Sanum Juub",
-        "5":"Samyan Mitr Town"
-    }
+    places = {}
 
     # display check in information 
-    for key in places:
-        print("  "+key+". "+places[key])
+    i = 1
+    for place in checkin_dict:
+        print("  "+str(i)+". "+place)
+        places[str(i)] = place
+        i += 1
     place_input = input("Select the place: ")
 
-    
     # check if input is valid. if not, try again
     if places.get(place_input, 0) == 0:
         print("invalid input, please try again")
@@ -33,12 +29,8 @@ def check_in():
         key = places[place_input]
 
         # checkout this person from other place
-        
 
-        # check to see if this place is added
-        if checkin_dict.get(key, 0) == 0:
-            checkin_dict[key] = []
-            
+
         # append phone number
         checkin_dict[key].append(phone_number)
 
@@ -73,7 +65,13 @@ def main():
 
 # initialize dictionary
 # use place as key and list of phone number as value
-checkin_dict = {}
+checkin_dict = {
+    "Mahamakut Building" : [],
+    "Sara Phra Kaew" : [],
+    "CU Sport Complex": [],
+    "Sanum Juub": [],
+    "Samyan Mitr Town" : []
+}
 
 while True:
     main()
