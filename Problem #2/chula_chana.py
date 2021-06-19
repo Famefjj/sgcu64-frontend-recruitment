@@ -55,6 +55,7 @@ def main():
     print("  1. Check in user")
     print("  2. Check out user")
     print("  3. Print people count")
+    print("  4. Exit")
 
     # input string
     main_input = input("Please input any number: ")
@@ -67,10 +68,13 @@ def main():
         check_out(phone_number)
     elif main_input == "3":
         people_count()
+    elif main_input == "4":
+        return -1
     else :
         print("invalid input, please try again.")
         print("-----------------------------------------------------------------")
         main()
+    return 0
 
 
 # initialize dictionary
@@ -84,4 +88,6 @@ checkin_dict = {
 }
 
 while True:
-    main()
+    if main() == -1:
+        break
+    
