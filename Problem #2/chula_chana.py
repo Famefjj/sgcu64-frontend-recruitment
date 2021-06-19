@@ -1,4 +1,7 @@
-
+def check_out(phone_number):
+    for place in checkin_dict:
+        if phone_number in checkin_dict[place]:
+            checkin_dict[place].remove(phone_number)
 
 def check_in():
     
@@ -29,12 +32,10 @@ def check_in():
         key = places[place_input]
 
         # checkout this person from other place
-
+        check_out(phone_number)
 
         # append phone number
         checkin_dict[key].append(phone_number)
-
-        print(checkin_dict)
         
         # display check in information in user screen
         print("Check in {} into {}".format(phone_number, key))
@@ -54,7 +55,8 @@ def main():
     if main_input == "1":
         check_in()
     elif main_input == "2":
-        pass
+        phone_number = input("Enter phone number you want to check out: ")
+        check_out(phone_number)
     elif main_input == "3":
         pass
     else :
@@ -73,5 +75,5 @@ checkin_dict = {
     "Samyan Mitr Town" : []
 }
 
-while True:
-    main()
+
+main()
