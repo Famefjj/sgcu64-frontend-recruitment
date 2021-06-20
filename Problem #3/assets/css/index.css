@@ -112,7 +112,13 @@ button:hover {
 
   .kite {
     /* USER CODE Begin: Control kite */
-
+    max-width: 512px;
+    max-height: 512px;
+    width: 50vw;
+    height:50vw;
+    margin-top: 8em;
+    margin-left:10em;
+    position: absolute;
     /* USER CODE END: Control kite */
   }
 
