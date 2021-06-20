@@ -27,7 +27,7 @@ body {
 
 .register-card {
   /* USER CODE Begin: Style the card */
-
+  
   /* USER CODE End: Style the card */
 }
 
@@ -120,30 +120,52 @@ button:hover {
     margin-top: 8em;
     margin-left:10em;
     position: absolute;
+    z-index: 2;
     /* USER CODE END: Control kite */
   }
 
   .cloud {
     /* USER CODE Begin: Style cloud */
-    display:block;
+    position: relative;
+    z-index: 1;
     /* USER CODE END: Style kite */
   }
 
   .cloud.cloud1 {
     /* USER CODE Begin: Control cloud1 */
-
+    display:block;
+    max-width:359px;
+    max-height: 155px;
+    width:50vw;
+    height:50vw;
+    margin-left: 3.5625em;
+    margin-top: 2.9375em;
     /* USER CODE END: Control cloud1 */
   }
 
   .cloud.cloud2 {
     /* USER CODE Begin: Control cloud2 */
-
+    display: block;
+    max-width:359px;
+    max-height: 155px;
+    width:50vw;
+    height:50vw;
+    margin-left: 2.4375em;
+    /* margin-right: 7.9375em; */
+    margin-top: 15.8125em;
     /* USER CODE END: Control cloud2 */
   }
 
   .cloud.cloud3 {
     /* USER CODE Begin: Control cloud3*/
-
+    display: block;
+    position: absolute;
+    max-width:359px;
+    max-height: 155px;
+    width:50vw;
+    height:50vw;
+    margin-left: 3.5625em;
+    margin-top: 28.1875em;
     /* USER CODE END: Control cloud3 */
   }
 
