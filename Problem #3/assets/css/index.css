@@ -64,7 +64,7 @@ input:focus {
 
 button {
   /* USER CODE Begin: Style the button */
-
+  
   /* USER CODE END: Style the button */
 }
 
@@ -76,7 +76,7 @@ button:hover {
 .cloud,
 .footer {
   /* USER CODE Begin: Hide it */
-
+  display: none;
   /* USER CODE END: Hide it  */
 }
 
@@ -87,7 +87,7 @@ button:hover {
 }
 
 /* USER CODE Begin: Manage screen width */
-@media screen and (min-width: 0px) {
+@media screen and (min-width: 500px){
   /* USER CODE END: Manage screen width */
   body {
     background: url("../img/bg-desktop.svg");
@@ -112,6 +112,7 @@ button:hover {
 
   .kite {
     /* USER CODE Begin: Control kite */
+    display:block;
     max-width: 512px;
     max-height: 512px;
     width: 50vw;
@@ -124,7 +125,7 @@ button:hover {
 
   .cloud {
     /* USER CODE Begin: Style cloud */
-
+    display:block;
     /* USER CODE END: Style kite */
   }
 
