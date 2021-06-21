@@ -27,7 +27,14 @@ body {
 
 .register-card {
   /* USER CODE Begin: Style the card */
-  
+  background-color: white;
+  box-sizing: border-box;
+  max-height:649px;
+  max-width:361px;
+  padding: 20px 50px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  z-index:3;
   /* USER CODE End: Style the card */
 }
 
@@ -49,7 +56,15 @@ body {
 
 input {
   /* USER CODE Begin: Style the input field */
-
+  margin-bottom: 31px;
+  width: 260px;
+  height: 32px;
+  border-radius:4px;
+  box-sizing: border-box;
+  border: 2px solid #c2c0c0;
+  padding: 4px 0 4px 14px;
+  opacity: 0.45;
+  
   /* USER CODE END: Style the input field */
 }
 
@@ -64,6 +79,13 @@ input:focus {
 
 button {
   /* USER CODE Begin: Style the button */
+  box-sizing: border-box;
+  width: 260px;
+  height: 32px;
+  border: hidden;
+  border-radius: 4px;
+  color: white;
+  background: #DE5C8E;
   
   /* USER CODE END: Style the button */
 }
@@ -172,7 +194,14 @@ button:hover {
 
   input {
     /* USER CODE Begin: Style the input field */
-
+    margin-bottom: 31px;
+    width: 260px;
+    height: 32px;
+    border-radius:4px;
+    box-sizing: border-box;
+    border: 2px solid #c2c0c0;
+    padding: 4px 0 4px 14px;
+    opacity: 0.45;
     /* USER CODE END: Style the input field */
   }
 
