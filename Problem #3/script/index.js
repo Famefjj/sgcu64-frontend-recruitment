@@ -29,6 +29,6 @@ form.addEventListener("submit", event => {
   }
   console.log(data)
   /* USER CODE Begin: What happened next after recieve form data (Optional) */
-  
+  form.submit()
   /* USER CODE END: What happened next after recieve form data (Optional) */
 })
