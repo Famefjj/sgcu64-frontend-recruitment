@@ -126,6 +126,7 @@ button:hover {
 
   .cloud {
     /* USER CODE Begin: Style cloud */
+    display:flex;
     position: relative;
     z-index: 1;
     /* USER CODE END: Style kite */
@@ -133,32 +134,31 @@ button:hover {
 
   .cloud.cloud1 {
     /* USER CODE Begin: Control cloud1 */
-    display:block;
     max-width:359px;
     max-height: 155px;
     width:50vw;
     height:50vw;
     margin-left: 3.5625em;
     margin-top: 2.9375em;
+    margin-right:-200px;
+    position: relative;
     /* USER CODE END: Control cloud1 */
   }
 
   .cloud.cloud2 {
     /* USER CODE Begin: Control cloud2 */
-    display: block;
     max-width:359px;
     max-height: 155px;
     width:50vw;
     height:50vw;
-    margin-left: 2.4375em;
-    /* margin-right: 7.9375em; */
+    margin-left: 25.375em;
     margin-top: 15.8125em;
+    position: absolute;
     /* USER CODE END: Control cloud2 */
   }
 
   .cloud.cloud3 {
     /* USER CODE Begin: Control cloud3*/
-    display: block;
     position: absolute;
     max-width:359px;
     max-height: 155px;
@@ -166,6 +166,7 @@ button:hover {
     height:50vw;
     margin-left: 3.5625em;
     margin-top: 28.1875em;
+    position: absolute;
     /* USER CODE END: Control cloud3 */
   }
 
