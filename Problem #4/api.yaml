@@ -240,22 +240,51 @@ paths:
       security:
       - hr_id: []
       
-  
-    
-    
-  
-  
-  
-        
-        
+  /worker/login:
+    get:
+      tags: 
+      - "Employee"
+      summary: "Login worker by id and password"
+      description: "Login system for employee by id and password. *Example:https://api.employeesgcu.org/1.0/worker?id=6550052321&password=pass123*"
+      operationId: "loginWorker"
+      responses:
       
-      
+        200:
+          description: "Successful response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Worker"
+        400:
+          description: "Bad request"
           
+        404:
+          description: "Worker not found"
+      
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "id for login"
+        required: true
+        schema:
+          type: "integer"
+          format: "int32"
+      - name: "password"
+        in: "query"
+        description: "The password for login"
+        required: true
+        schema:
+          type: "string"
+      security:
+      - hr_id: []
+      - worker_id: []
+    
+    
+         
         
-
-  
-security:
-- worker_id: []
+      
+      
+      
 
 
         
