@@ -66,7 +66,24 @@ components:
           role: "engineer"
           
           
-            
+    changePass:
+      title: changePassword
+      type: object
+      properties:
+        id:
+          type: integer
+          description: worker id
+          format: int32
+          example: 6550052321
+        password:
+          type: string
+          description: worker password
+          example: oldpass123
+        new_password: 
+          type: string
+          description: new password
+          example: pass123
+          
     Worker:
       title: Worker
       type: object
@@ -260,7 +277,7 @@ paths:
           
         404:
           description: "Worker not found"
-      
+          
       parameters:
       - name: "id"
         in: "query"
@@ -278,12 +295,39 @@ paths:
       security:
       - hr_id: []
       - worker_id: []
-    
-    
-         
-        
       
+  /worker/changePassword:
+    post:
+      tags: 
+      - "Employee"
+      summary: "Change password for worker"
+      description: "Change password using old password, new password and id"
+      operationId: "changePass"
+    
+      requestBody:
+        description: "Change password using current password, new password ,and id. return worker instance with new password."
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/changePass"
+      responses:
+        200:
+          description: "Successful response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Worker"
+        400:
+          description: "Bad request"
+        404:
+          description: "Worker not found"
+      security:
+      - hr_id: []
+      - worker_id: []
+  
       
+  
       
 
 
