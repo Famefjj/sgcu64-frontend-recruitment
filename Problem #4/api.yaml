@@ -122,7 +122,7 @@ paths:
   /worker:
     post:
       tags: 
-      - "Employee"
+      - "HR"
       summary: "Create a new worker"
       description: "Add a new worker with using id, firstname, lastname, password, role, salary. Returns the instance of worker"
       operationId: "addWorker"
@@ -148,7 +148,7 @@ paths:
   
     get:
       tags:
-      - Employee
+      - HR
       summary: "Read employee information"
       description: "Access to employee information by id, name, or role. return array of workers that match. *Example: https://api.employeesgcu.org/1.0/worker?lastName=Wong&role=engineer*"
       operationId: ReadEmployeeInfo
@@ -198,7 +198,7 @@ paths:
       
     put:
       tags: 
-      - "Employee"
+      - "HR"
       summary: "Update worker information"
       description: "Modify worker information such as id, firstname, lastname and role."
       operationId: "Update"
@@ -228,7 +228,7 @@ paths:
   /worker/{id}:
     delete:
       tags:
-      - "Employee"
+      - "HR"
       summary: "Delete worker information by id"
       description: "Delete worker information by worker id. return instance of worker that delete."
       operationId: "deleteWorker"
@@ -322,6 +322,45 @@ paths:
           description: "Bad request"
         404:
           description: "Worker not found"
+      security:
+      - hr_id: []
+      - worker_id: []
+      
+  /worker/viewinfo:
+    get:
+      tags: 
+      - "Employee"
+      summary: "request information for employee by id and password"
+      description: "employee can request information by id and password. *Example:https://api.employeesgcu.org/1.0/worker?id=6550052321&password=pass123*"
+      operationId: "viewInfo"
+      responses:
+      
+        200:
+          description: "Successful response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Worker"
+        400:
+          description: "Bad request"
+          
+        404:
+          description: "Worker not found"
+          
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "worker id for view information"
+        required: true
+        schema:
+          type: "integer"
+          format: "int32"
+      - name: "password"
+        in: "query"
+        description: "worker password for view information"
+        required: true
+        schema:
+          type: "string"
       security:
       - hr_id: []
       - worker_id: []
