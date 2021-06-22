@@ -125,7 +125,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Worker"
         400:
-          description: "Invalid input"
+          description: "Bad request"
       security:
       - hr_id: []
   
@@ -133,33 +133,33 @@ paths:
       tags:
       - Employee
       summary: "Read employee information"
-      description: "Access to employee information by id, name, or role. return array of workers that match. *Example: https://api.employeesgcu.org/1.0/?lastName=Wong&role=engineer*"
+      description: "Access to employee information by id, name, or role. return array of workers that match. *Example: https://api.employeesgcu.org/1.0/worker?lastName=Wong&role=engineer*"
       operationId: ReadEmployeeInfo
       parameters:
       - name: id
         in: query
         description: "**Worker ID**. request employee information by id, return array"
-        example: "https://api.employeesgcu.org/1.0/?id=6550049221"
+        example: "https://api.employeesgcu.org/1.0/worker?id=6550049221"
         schema:
           type: "integer"
           format: int32
       - name: firstName
         in: query
         description: "**Worker first name**. request employee information by first name, return array"
-        example: "https://api.employeesgcu.org/1.0/?firstName=Fame"
+        example: "https://api.employeesgcu.org/1.0/worker?firstName=Fame"
         schema:
           type: "string"
       - name: lastName
         in: query
         description: "**Worker last name**. request employee information by last name, return array"
-        example: "https://api.employeesgcu.org/1.0/?lastName=Wong"
+        example: "https://api.employeesgcu.org/1.0/worker?lastName=Wong"
         schema:
           type: "string"
           
       - name: role
         in: query
         description: "**Worker role**. request employee information by role, return array"
-        example: "https://api.employeesgcu.org/1.0/?role=marketing"
+        example: "https://api.employeesgcu.org/1.0/worker?role=marketing"
         schema:
           type: "string"
         
@@ -170,9 +170,86 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ArrayOfWorkers"
+        400:
+          description: "Bad request"
                 
         404:
-          description: Not found
+          description: "Worker not found"
+          
+      security:
+      - hr_id: []
+      
+    put:
+      tags: 
+      - "Employee"
+      summary: "Update worker information"
+      description: "Modify worker information such as id, firstname, lastname and role."
+      operationId: "Update"
+      
+      requestBody:
+        description: "Modify worker object"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Worker"
+      responses:
+        200:
+          description: "Successful response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Worker"
+        400:
+          description: "Bad request"
+        404:
+          description: "Worker not found"
+          
+      security:
+      - hr_id: []
+  
+  /worker/{id}:
+    delete:
+      tags:
+      - "Employee"
+      summary: "Delete worker information by id"
+      description: "Delete worker information by worker id. return instance of worker that delete."
+      operationId: "deleteWorker"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+        description: "**Worker ID**. delete worker information by id"
+        example: "https://api.employeesgcu.org/1.0/worker/6550052321"
+      
+      responses:
+        200:
+          description: "Successful response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Worker"
+        400:
+          description: "Bad request"
+        404:
+          description: "Worker not found"
+          
+      security:
+      - hr_id: []
+      
+  
+    
+    
+  
+  
+  
+        
+        
+      
+      
           
         
 
