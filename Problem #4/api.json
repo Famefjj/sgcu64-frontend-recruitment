@@ -1,0 +1,500 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Employee Management",
+    "description": "Employee Management enable HR to create, read, update and delete employees data in SGCU company.",
+    "version": "1.0",
+    "contact": {
+      "email": "fjj20092@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.employeesgcu.org/1.0/"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "hr_id": {
+        "type": "apiKey",
+        "description": "API key for HR.",
+        "name": "hr_id",
+        "in": "query"
+      },
+      "worker_id": {
+        "type": "apiKey",
+        "description": "API key for worker.",
+        "name": "worker_id",
+        "in": "query"
+      }
+    },
+    "schemas": {
+      "ArrayOfWorkers": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "password": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "salary": {
+              "type": "integer"
+            },
+            "role": {
+              "type": "string"
+            }
+          }
+        },
+        "example": [
+          {
+            "id": 6550012584,
+            "password": "abc123",
+            "firstName": "Fame",
+            "lastName": "Wong",
+            "salary": 18000,
+            "role": "engineer"
+          },
+          {
+            "id": 6550098521,
+            "password": "ghj",
+            "firstName": "Mei",
+            "lastName": "Wong",
+            "salary": 20000,
+            "role": "engineer"
+          }
+        ]
+      },
+      "changePass": {
+        "title": "changePassword",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "worker id",
+            "format": "int32",
+            "example": 6550052321
+          },
+          "password": {
+            "type": "string",
+            "description": "worker password",
+            "example": "oldpass123"
+          },
+          "new_password": {
+            "type": "string",
+            "description": "new password",
+            "example": "pass123"
+          }
+        }
+      },
+      "Worker": {
+        "title": "Worker",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "worker id",
+            "format": "int32",
+            "example": 6550052321
+          },
+          "password": {
+            "type": "string",
+            "description": "worker password",
+            "example": "pass123"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "worker first name",
+            "example": "Bobby"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "worker last name",
+            "example": "Barber"
+          },
+          "salary": {
+            "type": "integer",
+            "description": "salary of worker in Bath unit",
+            "format": "int32",
+            "example": 20000
+          },
+          "role": {
+            "type": "string",
+            "description": "role of worker",
+            "example": "marketing"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/worker": {
+      "post": {
+        "tags": [
+          "HR"
+        ],
+        "summary": "Create a new worker",
+        "description": "Add a new worker with using id, firstname, lastname, password, role, salary. Returns the instance of worker",
+        "operationId": "addWorker",
+        "requestBody": {
+          "description": "Create new worker object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Worker"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Worker"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "hr_id": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "HR"
+        ],
+        "summary": "Read employee information",
+        "description": "Access to employee information by id, name, or role. return array of workers that match. *Example: https://api.employeesgcu.org/1.0/worker?lastName=Wong&role=engineer*",
+        "operationId": "ReadEmployeeInfo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "**Worker ID**. request employee information by id, return array",
+            "example": "https://api.employeesgcu.org/1.0/worker?id=6550049221",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "firstName",
+            "in": "query",
+            "description": "**Worker first name**. request employee information by first name, return array",
+            "example": "https://api.employeesgcu.org/1.0/worker?firstName=Fame",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lastName",
+            "in": "query",
+            "description": "**Worker last name**. request employee information by last name, return array",
+            "example": "https://api.employeesgcu.org/1.0/worker?lastName=Wong",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "description": "**Worker role**. request employee information by role, return array",
+            "example": "https://api.employeesgcu.org/1.0/worker?role=marketing",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrayOfWorkers"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Worker not found"
+          }
+        },
+        "security": [
+          {
+            "hr_id": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "HR"
+        ],
+        "summary": "Update worker information",
+        "description": "Modify worker information such as id, firstname, lastname and role.",
+        "operationId": "Update",
+        "requestBody": {
+          "description": "Modify worker object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Worker"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Worker"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Worker not found"
+          }
+        },
+        "security": [
+          {
+            "hr_id": []
+          }
+        ]
+      }
+    },
+    "/worker/{id}": {
+      "delete": {
+        "tags": [
+          "HR"
+        ],
+        "summary": "Delete worker information by id",
+        "description": "Delete worker information by worker id. return instance of worker that delete.",
+        "operationId": "deleteWorker",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "**Worker ID**. delete worker information by id",
+            "example": "https://api.employeesgcu.org/1.0/worker/6550052321"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Worker"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Worker not found"
+          }
+        },
+        "security": [
+          {
+            "hr_id": []
+          }
+        ]
+      }
+    },
+    "/worker/login": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Login worker by id and password",
+        "description": "Login system for employee by id and password. *Example:https://api.employeesgcu.org/1.0/worker?id=6550052321&password=pass123*",
+        "operationId": "loginWorker",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Worker"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Worker not found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id for login",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "The password for login",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "hr_id": []
+          },
+          {
+            "worker_id": []
+          }
+        ]
+      }
+    },
+    "/worker/changePassword": {
+      "post": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Change password for worker",
+        "description": "Change password using old password, new password and id",
+        "operationId": "changePass",
+        "requestBody": {
+          "description": "Change password using current password, new password ,and id. return worker instance with new password.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/changePass"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Worker"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Worker not found"
+          }
+        },
+        "security": [
+          {
+            "hr_id": []
+          },
+          {
+            "worker_id": []
+          }
+        ]
+      }
+    },
+    "/worker/viewinfo": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "request information for employee by id and password",
+        "description": "employee can request information by id and password. *Example:https://api.employeesgcu.org/1.0/worker?id=6550052321&password=pass123*",
+        "operationId": "viewInfo",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Worker"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Worker not found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "worker id for view information",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "worker password for view information",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "hr_id": []
+          },
+          {
+            "worker_id": []
+          }
+        ]
+      }
+    }
+  }
+}
